@@ -21,6 +21,7 @@
 package com.kevintresuelo.treble.screens
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -286,7 +287,7 @@ class AboutFragment : Fragment() {
                     Uri.parse("market://details?id=$appPackageName")
                 )
             )
-        } catch (anfe: android.content.ActivityNotFoundException) {
+        } catch (anfe: ActivityNotFoundException) {
             openUrl(activity as Activity, "https://play.google.com/store/apps/details?id=$appPackageName", false)
         }
     }
@@ -303,7 +304,7 @@ class AboutFragment : Fragment() {
             return ContributorsViewHolder(itemView)
         }
 
-        override fun onBindViewHolder(holder: ContributorsListAdapter.ContributorsViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: ContributorsViewHolder, position: Int) {
             holder.bind(getItem(position))
         }
 

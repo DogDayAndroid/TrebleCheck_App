@@ -273,7 +273,7 @@ class CheckerFragment : Fragment() {
      * Shows an AlertDialog enabling users to change themes
      */
     private fun showThemeSelector() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
         val selectedTheme = sharedPreferences.getString(getString(R.string.theme_key), getString(R.string.theme_default_value))
 
         val themeEntries = arrayOf(getString(R.string.theme_option_default_title), getString(R.string.theme_option_light_title), getString(R.string.theme_option_dark_title))
@@ -284,13 +284,13 @@ class CheckerFragment : Fragment() {
         themeSelectorDialog = MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.theme_title)
             .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(android.R.string.ok) { dialog, which ->
+            .setPositiveButton(android.R.string.ok) { _, _ ->
                 with (sharedPreferences.edit()) {
                     putString(getString(R.string.theme_key), themeEntryValues[selectedThemeIndex])
                     apply()
                 }
             }
-            .setSingleChoiceItems(themeEntries, selectedThemeIndex) {dialog, which ->
+            .setSingleChoiceItems(themeEntries, selectedThemeIndex) { _, which ->
                 selectedThemeIndex = which
             }
 

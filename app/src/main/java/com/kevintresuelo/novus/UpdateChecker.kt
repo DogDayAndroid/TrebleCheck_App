@@ -144,7 +144,7 @@ class UpdateChecker(private val activity: Activity, private val rootView: View, 
     }
 
     private fun isUpdateAlreadyStale(appUpdateInfo: AppUpdateInfo, daysThreshold: Int): Boolean {
-        return (appUpdateInfo.clientVersionStalenessDays() != null && appUpdateInfo.clientVersionStalenessDays() >= daysThreshold)
+        return (appUpdateInfo.clientVersionStalenessDays() != null && appUpdateInfo.clientVersionStalenessDays()!!.toInt() >= daysThreshold)
     }
 
     private fun popupSnackbarForCompleteUpdate() {
