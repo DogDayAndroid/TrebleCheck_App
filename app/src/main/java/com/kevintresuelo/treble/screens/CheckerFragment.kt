@@ -36,10 +36,8 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.kevintresuelo.adnoto.RatePrompter
 import com.kevintresuelo.treble.R
-import com.kevintresuelo.treble.billing.viewmodels.BillingViewModel
 import com.kevintresuelo.treble.checker.*
 import com.kevintresuelo.treble.databinding.FragmentCheckerBinding
-import com.kevintresuelo.treble.donate.DonateDialogFragment
 import com.kevintresuelo.treble.utils.openUrl
 
 
@@ -72,8 +70,6 @@ class CheckerFragment : Fragment() {
         /**
          * Checks for new purchases of the user
          */
-        val billingViewModel = ViewModelProvider(this).get(BillingViewModel::class.java)
-        billingViewModel.queryPurchases()
 
         /**
          * Shows the Donate CardView if the user has opened the app thrice
@@ -89,16 +85,6 @@ class CheckerFragment : Fragment() {
             if (!isDonateCardAlreadyDismissed) {
                 val timesAppOpened = sharedPrefs.getInt(timesAppOpenedKey, 0) + 1  // timesAppOpened + 1 more for this instance
                 if (timesAppOpened >= 3) {
-                    binding.fcMcvStatusDonate.visibility = View.VISIBLE
-                    binding.fcMbStatusDonateAction1.setOnClickListener {
-                        DonateDialogFragment(billingViewModel).show(parentFragmentManager, DonateDialogFragment.TAG)
-                        sharedPrefs.edit()?.putBoolean(hasDismissedKey, true)?.apply()
-                        binding.fcMcvStatusDonate.visibility = View.GONE
-                    }
-                    binding.fcMbStatusDonateAction2.setOnClickListener {
-                        sharedPrefs.edit()?.putBoolean(hasDismissedKey, true)?.apply()
-                        binding.fcMcvStatusDonate.visibility = View.GONE
-                    }
                 } else {
                     sharedPrefs.edit()?.putInt(timesAppOpenedKey, timesAppOpened)?.apply()
                 }

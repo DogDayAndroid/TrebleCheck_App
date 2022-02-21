@@ -37,10 +37,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.kevintresuelo.novus.UpdateChecker
 import com.kevintresuelo.treble.BuildConfig
 import com.kevintresuelo.treble.R
-import com.kevintresuelo.treble.billing.viewmodels.BillingViewModel
 import com.kevintresuelo.treble.databinding.DialogContributorsListBinding
 import com.kevintresuelo.treble.databinding.FragmentAboutBinding
-import com.kevintresuelo.treble.donate.DonateDialogFragment
 import com.kevintresuelo.treble.utils.AppInfo
 import com.kevintresuelo.treble.utils.openUrl
 import com.kevintresuelo.treble.utils.toOrdinal
@@ -58,7 +56,7 @@ class AboutFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         /**
          * Initializes data binding with the layout and view container.
@@ -229,14 +227,6 @@ class AboutFragment : Fragment() {
          */
         binding.faLlOthersTranslate.setOnClickListener {
             openUrl(activity as Activity, "https://poeditor.com/join/project/oVDSgMHUwC", false)
-        }
-
-        /**
-         * Opens the donation dialog
-         */
-        val billingViewModel = ViewModelProvider(this).get(BillingViewModel::class.java)
-        binding.faLlOthersDonate.setOnClickListener {
-            DonateDialogFragment(billingViewModel).show(parentFragmentManager, DonateDialogFragment.TAG)
         }
 
         /**
